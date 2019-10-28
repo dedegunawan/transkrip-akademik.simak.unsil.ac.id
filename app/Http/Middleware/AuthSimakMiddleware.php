@@ -33,7 +33,7 @@ class AuthSimakMiddleware
         );
         $url = $url.session('session_code');
         $last_check = session('last_check', 0);
-        $time_expired = 20; // in second
+        $time_expired = 60; // in second
         if($last_check && time() <= $last_check+$time_expired) return true;
         $guzzle = new Client();
         $data = $guzzle->get($url, [
@@ -43,6 +43,7 @@ class AuthSimakMiddleware
         $status = @$datas['status'];
 
         if ($status) {
+            $this->checkIsRightPermission($datas);
             session()->put($datas);
             session()->put('last_check', time());
             return true;
@@ -54,6 +55,11 @@ class AuthSimakMiddleware
         return false;
 
     }
+
+    public function checkIsRightPermission($datas) {
+
+    }
+
     public function redirectToLoginUrl()
     {
         $url = env(

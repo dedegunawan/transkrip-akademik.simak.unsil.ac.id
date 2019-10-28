@@ -137,8 +137,8 @@ class TranskripController extends Controller
             $ProdiID = substr($npm, 2, 4);
             $whatField = ($ttd1 == "DekanLama") ? "KodeJabatan" : "Jabatan";
             if ($ttd1 == "DirekturLama") $whatField = "KodeJabatan";
-            if (($ttd1 == "Direktur") && ($pasca == 8)) { //jika pasca
-                return Pejabat::where('KodeJabatan', 'DirekturP')->first();
+            if (($ttd1 == "Direktur") && ($pasca) ) { //jika pasca
+                return Pejabat::where('KodeJabatan', 'Direktur')->first();
             } elseif (($ttd1 == "Rektor") || ($ttd1 == "RektorLama") || ($ttd1 == "Wakil Rektor I") || ($ttd1 == "Wakil Rektor II") || ($ttd1 == "Wakil Rektor III") || ($ttd1 == "Wakil Rektor IV") || ($ttd1 == "Asisten Direktur I") || ($ttd1 == "Direktur")) {
                 //$s = "select * from pejabat where KodeJabatan = '$ttd1'";
                 return Pejabat::where('KodeJabatan', $ttd1)->first();
