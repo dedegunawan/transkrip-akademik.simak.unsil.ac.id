@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\AppException;
 use App\Exceptions\TugasAkhirNotFoundException;
 use App\Models\Pejabat;
 use App\Services\TranskripService;
+use App\TranskripS2Template;
 use DedeGunawan\TranskripAkademikUnsil\Databases\Builder\MysqliBuilder;
 use DedeGunawan\TranskripAkademikUnsil\Databases\ConnectionManager;
 use DedeGunawan\TranskripAkademikUnsil\Entities\TandaTangan;
@@ -58,6 +60,9 @@ class TranskripController extends Controller
         try {
 
             if (!$transkripService->getNpm()) return redirect()->route('transkrip_index');
+            if (!$preview && (!session('ttd_kiri') || !session('ttd_kanan'))) {
+                throw new AppException("Silahkan pilih Tanda tangan terlebih dahulu");
+            }
 
             $this->resolveTandaTangan();
 
@@ -81,7 +86,12 @@ class TranskripController extends Controller
 
             $transkrip_akademik->setNpm($transkripService->getNpm());
 
-            $transkrip_akademik->setTemplate(new BaseTemplate());
+            $pasca = substr($transkrip_akademik->getNpm(), 2, 1)==8;
+            if ($pasca) {
+                $transkrip_akademik->setTemplate(new TranskripS2Template());
+            } else {
+                $transkrip_akademik->setTemplate(new BaseTemplate());
+            }
             if ($preview) {
                 $transkrip_akademik->getTemplate()->setOption('with_header', false);
                 $transkrip_akademik->getTemplate()->setOption('with_footer', false);
@@ -95,7 +105,11 @@ class TranskripController extends Controller
             $transkrip_akademik->getTemplate()->render();
 
 
-        } catch (\Exception $exception) {
+        } catch (AppException $exception) {
+            $exception->addData('links', route('opsi_print'));
+            return $exception->render();
+        }
+        catch (\Exception $exception) {
             $errors = $exception->getMessage() . " at file " .
                 $exception->getFile() . " line " . $exception->getLine() . "\n";
             return new Response($errors, 500);

@@ -17,7 +17,7 @@
                 <div class="alert alert-danger">
                     {{$exception->getMessage() ?? 'Mahasiswa tidak ditemukan / mahasiswa belum dinyatakan lulus'}}. Silahkan cari mahasiswa lain.
                     <br/>
-                    <a href="" onclick="clearFilter(event, this)" ><small>Cari yang lain</small></a>
+                    <a href="{!! $links??'' !!}" onclick="{!! @$links ? '' : 'clearFilter(event, this)' !!}" ><small>Cari yang lain</small></a>
                     <form action="" id="clear-filter" method="post">
                         @csrf
                         <input type="hidden" name="npm" value="clear">

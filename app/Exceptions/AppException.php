@@ -43,6 +43,11 @@ class AppException extends \Exception
         return $this->datas;
     }
 
+    public function addData($key, $value)
+    {
+        $this->datas[$key] = $value;
+    }
+
     /**
      * @param mixed $datas
      */
