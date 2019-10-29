@@ -12,6 +12,7 @@ use App\Exceptions\MahasiswaNotFoundException;
 use App\Exceptions\TugasAkhirNotFoundException;
 use App\Models\TugasAkhir;
 use DedeGunawan\TranskripAkademikUnsil\Entities\Tanggal;
+use DedeGunawan\TranskripAkademikUnsil\TranskripAkademikUnsil;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\DB;

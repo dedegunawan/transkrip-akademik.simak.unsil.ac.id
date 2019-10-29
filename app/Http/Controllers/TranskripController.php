@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AppMysqliResolver;
 use App\Exceptions\AppException;
 use App\Exceptions\TugasAkhirNotFoundException;
 use App\Models\Pejabat;
@@ -74,7 +75,7 @@ class TranskripController extends Controller
             // enable language support
             if (session('bahasa')) $transkrip_akademik->setLanguage(session('bahasa'));
 
-                $mysqli = new MysqliBuilder();
+            $mysqli = new MysqliBuilder();
             $mysqli->setHost(getenv('DB_HOST'));
             $mysqli->setUsername(getenv('DB_USERNAME'));
             $mysqli->setDbname(getenv('DB_DATABASE'));
@@ -97,7 +98,7 @@ class TranskripController extends Controller
                 $transkrip_akademik->getTemplate()->setOption('with_footer', false);
             }
 
-            $transkrip_akademik->setResolver(new MysqliResolver());
+            $transkrip_akademik->setResolver(new AppMysqliResolver());
             $transkrip_akademik->resolve();
 
             if (!$preview) $this->buildInformasiPrint();
