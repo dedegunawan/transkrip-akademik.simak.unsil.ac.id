@@ -43,5 +43,10 @@ class AppMysqliResolver extends MysqliResolver
         $mahasiswa = Mahasiswa::find($transkrip_akademik->getNpm());
         $mahasiswa['predikat'] = $predikatColumnMahasiswa;
         $mahasiswa->save();
+
+        $konsentrasi = $transkrip_akademik->getKonsentrasi();
+        if (substr($konsentrasi->getKodeProdi(), 0, 2)=='21') {
+            $konsentrasi->setNamaKonsentrasi("");
+        }
     }
 }

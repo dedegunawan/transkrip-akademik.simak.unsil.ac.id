@@ -197,7 +197,7 @@ class TranskripS2Template extends BaseTemplate
     public function getTinggiBaris()
     {
         $ju = TranskripAkademikUnsil::getInstance()->getKrsCollection()->count();
-        if ($ju == 15) {
+        if ($ju <= 15) {
             $ti = 7.2;
         } elseif ($ju == 16) {
             $ti = 7;
@@ -227,9 +227,10 @@ class TranskripS2Template extends BaseTemplate
             $ti = 3.25;
         } elseif ($ju == 39) {
             $ti = 3.18;
-        } elseif ($ju == 40) {
+        } elseif ($ju >= 40) {
             $ti = 3;
         }
+
         return $ti;
     }
 
