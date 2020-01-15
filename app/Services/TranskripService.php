@@ -94,7 +94,7 @@ class TranskripService
             //----autonumbering
             $s = "SELECT nomortranskrip from ta where tahun='$tahun' and noseri like '%/ UN58 / PP.03.01 /%' order by nomortranskrip desc LIMIT 1";
             $w = (array) DB::selectOne($s);
-            $auto     = $w['nomortranskrip'];
+            $auto     = @$w['nomortranskrip'];
             // $auto = 0015;
             $gen      = $auto + 1;
 

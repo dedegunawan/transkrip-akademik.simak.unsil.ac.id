@@ -293,4 +293,28 @@ class TranskripController extends Controller
         return redirect()->route('generate_nomor_transkrip');
     }
 
+    public function doGenerateNomorTranskripByRequestNpm(Request $request, TranskripService $transkripService)
+    {
+        if (!$request->input('npm')) return ['status' => 0, 'message' => 'fail'];
+        $transkripService->setNpm($request->input('npm'));
+
+        $mahasiswa = $transkripService->getMahasiswa();
+        $tugas_akhir = $mahasiswa['tugas_akhir'];
+        $nomortranskrip = @$tugas_akhir['nomortranskrip'];
+        if ($nomortranskrip) return ['status' => 1, 'message' => 'success '.$nomortranskrip];
+
+        $validatedData = $request->validate([
+            'bulan' => 'required|between:1,12',
+            'tahun' => 'required|integer',
+        ]);
+
+
+        $noseri = $transkripService->generateNomorTranskrip(
+            $request->input('tahun'),
+            $request->input('bulan')
+        );
+        return ['status' => 1, 'message' => 'success '.$noseri];
+        //return redirect()->route('generate_nomor_transkrip');
+    }
+
 }

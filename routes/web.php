@@ -30,6 +30,12 @@ Route::middleware([\App\Http\Middleware\AuthSimakMiddleware::class])->group(func
     Route::get('/generate-nomor-transkrip.html', 'TranskripController@generateNomorTranskrip')->name('generate_nomor_transkrip');
     Route::post('/generate-nomor-transkrip.html', 'TranskripController@doGenerateNomorTranskrip')->name('do_generate_nomor_transkrip');
 
+
+    Route::post('/generate-nomor-transkrip-by-npm.html', 'TranskripController@doGenerateNomorTranskripByRequestNpm')
+        ->name('do_generate_nomor_transkrip_by_npm');
+
+
+
 });
 
 Route::get('auth', 'SimakAuthController@check');
