@@ -117,8 +117,8 @@ class TranskripS2Template extends BaseTemplate
             $p->setX(15.5);
         }
         $p->Cell(7, 20, '', "LTR", 0, 'C'); // NO
-        $p->Cell(20, 20, '', "LTR", 0, 'C'); //KODE MK
-        $p->Cell(110, 20, '', "LTR", 0, 'C'); //NAMA MK
+        $p->Cell(25, 20, '', "LTR", 0, 'C'); //KODE MK
+        $p->Cell(105, 20, '', "LTR", 0, 'C'); //NAMA MK
         $p->Cell(12, 20, '', "LTR", 0, 'C'); //SKS
         $p->Cell(12, 20, '', "LTR", 0, 'C');
         $p->Cell(12, 20, '', "LTR", 0, 'C');
@@ -146,8 +146,8 @@ class TranskripS2Template extends BaseTemplate
 
         $p->SetFont('Helvetica', 'B', 7);
         $p->Cell(7, $t, 'NO', 1, 0, 'C');
-        $p->Cell(20, $t, 'KODE MK', 1, 0, 'C');
-        $p->Cell(110, $t, 'MATA KULIAH', 1, 0, 'C');
+        $p->Cell(25, $t, 'KODE MK', 1, 0, 'C');
+        $p->Cell(105, $t, 'MATA KULIAH', 1, 0, 'C');
         $p->SetFont('Helvetica', 'B', 6.5);
         $p->Cell(12, $t, 'SKS', 1, 0, 'C');
         $p->Cell(12, $t / 2, 'HURUF', 'TLR', 0, 'C');
@@ -182,8 +182,8 @@ class TranskripS2Template extends BaseTemplate
         foreach ($krs_collection as $n => $krs) {
             $p->setX(15.5);
             $p->Cell(7, $ti, $n+1, 'L', 0, 'C');
-            $p->Cell(20, $ti, $krs['kode_matakuliah'], 'L', 0, 'C');
-            $p->Cell(110, $ti, $krs['nama_matakuliah'], 'L', 0);
+            $p->Cell(25, $ti, $krs['kode_matakuliah'], 'L', 0, 'C');
+            $p->Cell(105, $ti, $krs['nama_matakuliah'], 'L', 0);
             $p->Cell(12, $ti, $krs['sks'], 'L', 0, 'C');
             $p->Cell(12, $ti, $krs['huruf_mutu'], 'L', 0, 'C');
             $p->Cell(12, $ti, number_format($krs['angka_mutu'], 2, ".", ","), 'L', 0, 'C');
