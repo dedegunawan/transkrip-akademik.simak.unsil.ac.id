@@ -70,7 +70,7 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
 
         //<---  KOORDINAT HEADER TABEL KIRI
         if ($this->getOption('with_header')) {
-            $p->setXY(6, 83);
+            $p->setXY(6, 90);
         } else {
             $p->setX(6);
         }
@@ -153,7 +153,7 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
 
         // <---  KOORDINAT ISI TABEL KIRI
         if ($this->getOption('with_header')) {
-            $p->setXY(6, 90.5);
+            $p->setXY(6, 97.5);
         } else {
             $p->setX(6);
         }
@@ -161,7 +161,7 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
         $ti = $this->getTinggiBaris();
         $jumlah = $krs_collection->count();
         $barisTotal = ceil($jumlah/2);
-        if ($barisTotal < 40) $barisTotal = 49;
+        if ($barisTotal < 40) $barisTotal = 47;
 
         $lastYPosition = $p->GetY();
 

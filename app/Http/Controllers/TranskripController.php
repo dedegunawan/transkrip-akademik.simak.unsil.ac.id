@@ -18,6 +18,7 @@ use DedeGunawan\TranskripAkademikUnsil\Templates\BaseTemplate;
 use DedeGunawan\TranskripAkademikUnsil\TranskripAkademikUnsil;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class TranskripController extends Controller
 {
@@ -88,6 +89,7 @@ class TranskripController extends Controller
 
             $transkrip_akademik->setNpm($transkripService->getNpm());
 
+
             $pasca = substr($transkrip_akademik->getNpm(), 2, 1)==8;
             if ($pasca) {
                 $transkrip_akademik->setTemplate(new TranskripS2Template());
@@ -101,6 +103,13 @@ class TranskripController extends Controller
 
             $transkrip_akademik->setResolver(new AppMysqliResolver());
             $transkrip_akademik->resolve();
+
+            $nik = (array) DB::selectOne("SELECT nik from mhsw where MhswID=?", [$transkrip_akademik->getNpm()]);
+            $nik = @$nik['nik'];
+            $transkrip_akademik->getMahasiswa()->setNik($nik);
+            $nomor_pin = DB::selectOne("SELECT nomor_pin from nomor_pin where MhswID=?", [$transkrip_akademik->getNpm()]);
+            $nomor_pin = @$nomor_pin['nomor_pin'];
+            $transkrip_akademik->getMahasiswa()->setPin($nomor_pin);
 
             if (TranskripS1DuaKolomTemplate::harusDuaKolom()) {
                 $transkrip_akademik->setTemplate(new TranskripS1DuaKolomTemplate());
