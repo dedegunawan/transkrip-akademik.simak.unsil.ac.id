@@ -22,7 +22,7 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
 
         $jumlah = $krs_collection->count();
 
-        if ($jumlah >= 71) return true;
+        if ($jumlah >= 69) return true;
 
         return false;
     }
