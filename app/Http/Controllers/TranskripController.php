@@ -7,6 +7,7 @@ use App\Exceptions\AppException;
 use App\Exceptions\TugasAkhirNotFoundException;
 use App\Models\Pejabat;
 use App\Services\TranskripService;
+use App\TranskripS1DuaKolomTemplate;
 use App\TranskripS2Template;
 use DedeGunawan\TranskripAkademikUnsil\Databases\Builder\MysqliBuilder;
 use DedeGunawan\TranskripAkademikUnsil\Databases\ConnectionManager;
@@ -100,6 +101,10 @@ class TranskripController extends Controller
 
             $transkrip_akademik->setResolver(new AppMysqliResolver());
             $transkrip_akademik->resolve();
+
+            if (TranskripS1DuaKolomTemplate::harusDuaKolom()) {
+                $transkrip_akademik->setTemplate(new TranskripS1DuaKolomTemplate());
+            }
 
             if (!$preview) $this->buildInformasiPrint();
 
