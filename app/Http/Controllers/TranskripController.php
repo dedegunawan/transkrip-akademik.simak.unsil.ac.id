@@ -107,7 +107,7 @@ class TranskripController extends Controller
             $nik = (array) DB::selectOne("SELECT nik from mhsw where MhswID=?", [$transkrip_akademik->getNpm()]);
             $nik = @$nik['nik'];
             $transkrip_akademik->getMahasiswa()->setNik($nik);
-            $nomor_pin = DB::selectOne("SELECT nomor_pin from nomor_pin where MhswID=?", [$transkrip_akademik->getNpm()]);
+            $nomor_pin = (array) DB::selectOne("SELECT nomor_pin from nomor_pin where MhswID=?", [$transkrip_akademik->getNpm()]);
             $nomor_pin = @$nomor_pin['nomor_pin'];
             $transkrip_akademik->getMahasiswa()->setPin($nomor_pin);
 
