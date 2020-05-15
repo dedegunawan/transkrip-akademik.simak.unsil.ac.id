@@ -22,9 +22,9 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
 
         $jumlah = $krs_collection->count();
 
-        if ($jumlah >= 69) return true;
+//        if ($jumlah >= 60) return true;
 
-        return false;
+        return true;
     }
 
     public function BuatHeaderKolom()
