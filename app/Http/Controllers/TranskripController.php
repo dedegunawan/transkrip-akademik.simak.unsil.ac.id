@@ -111,7 +111,7 @@ class TranskripController extends Controller
             $nomor_pin = @$nomor_pin['nomor_pin'];
             $transkrip_akademik->getMahasiswa()->setPin($nomor_pin);
 
-            if (TranskripS1DuaKolomTemplate::harusDuaKolom()) {
+            if (TranskripS1DuaKolomTemplate::harusDuaKolom() && !$pasca) {
                 $transkrip_akademik->setTemplate(new TranskripS1DuaKolomTemplate());
             }
 
