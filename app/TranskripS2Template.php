@@ -325,10 +325,10 @@ class TranskripS2Template extends BaseTemplate
         $lbr = 20;
         $p->SetFont('Helvetica', '', 9);
         $p->Cell($lbr, 5, '', 0, 1, 'L');
-        $p->SetXY($ml, 263);
+        $p->SetXY($ml, 250);
         $p->Cell(190, $t, $js,0, 0, 'L');
         $p->Cell(190, 1, '', 0, 1, 'C');
-        $p->SetXY($ex - 5, 262);
+        $p->SetXY($ex - 5, 250);
 
         $t = 3; //ENTER BUAT JUDUL
         $p->SetFont('Helvetica', '', 9);
