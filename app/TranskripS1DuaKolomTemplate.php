@@ -149,7 +149,7 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
         $KRSIDs = [];
 
         $jumlah = $krs_collection->reduce(function ($acc, $krs) use (&$KRSIDs) {
-            $baris = ceil(strlen($krs['nama_matakuliah']) / 42);
+            $baris = ceil(strlen($krs['nama_matakuliah']) / 40);
             if ($baris > 1) $KRSIDs[$krs['id_matakuliah']] = $baris;
             return ($acc + $baris);
         }, 0);
