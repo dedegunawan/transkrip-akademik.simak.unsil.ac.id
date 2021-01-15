@@ -205,7 +205,7 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
                 $realN = $realN+$kali-1;
                 $lastX = $p->GetX();
                 $lastY = $p->GetY();
-                $p->MultiCell(54, $ti, $krs['nama_matakuliah'], 'L', 'L');
+                $p->MultiCell(50, $ti, $krs['nama_matakuliah'], 'L', 'L');
                 $p->SetXY($lastX+54, $lastY);
             } else {
                 $p->Cell(54, $ti*$kali, $krs['nama_matakuliah'], 'L', 0);
@@ -242,7 +242,7 @@ class TranskripS1DuaKolomTemplate extends BaseTemplate
                 $realN = $realN+$kali-1;
                 $lastX = $p->GetX();
                 $lastY = $p->GetY();
-                $p->MultiCell(54, $ti, $krs['nama_matakuliah'], 'L', 'L');
+                $p->MultiCell(50, $ti, $krs['nama_matakuliah'], 'L', 'L');
                 $p->SetXY($lastX+54, $lastY);
             } else {
                 $p->Cell(54, $ti*$kali, $krs['nama_matakuliah'], 'L', 0);
