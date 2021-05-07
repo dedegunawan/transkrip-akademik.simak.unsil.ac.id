@@ -83,7 +83,9 @@ class EloquentResolver implements ResolverInterface
             'tanggal_lulus' => @$this->getMahasiswaModel()['ta']['Tgllulus'],
             'ipk' => @$this->getMahasiswaModel()['predikat'],
             'predikat' => @$this->getMahasiswaModel()['predikat'],
-            'judul' => @$this->getMahasiswaModel()['ta']['Judul']
+            'judul' => $this->getTranskripAkademikUnsil()->getLanguage() == 'en'
+                ? @$this->getMahasiswaModel()['ta']['Judul_en']
+                : @$this->getMahasiswaModel()['ta']['Judul']
         ]);
         $this->getTranskripAkademikUnsil()->setKelulusan($kelulusan);
     }
@@ -135,7 +137,7 @@ class EloquentResolver implements ResolverInterface
         $database = $this->getTranskripAkademikUnsil()->getConnectionManager()->getConnection();
         $ProdiID = substr($npm, 2, 4);
 
-        $s = "select k.KRSID as id_matakuliah, k.MKKode as kode_matakuliah, k.Nama as nama_matakuliah, 
+        $s = "select k.KRSID as id_matakuliah, k.MKKode as kode_matakuliah, k.Nama as nama_matakuliah,
         k.BobotNilai as angka_mutu, k.GradeNilai as huruf_mutu, k.SKS as sks
         from krs k
         left outer join mk mk on mk.MKID=k.MKID
@@ -171,7 +173,7 @@ class EloquentResolver implements ResolverInterface
         if (!$this->getTranskripAkademikUnsil()->getTandaTanganKiri()) {
             $kiri = $database->selectOne("
                 SELECT Jabatan as nama_jabatan, Nama as nama_pejabat, NIP as nip_pejabat
-                FROM pejabat where Jabatan='Dekan' 
+                FROM pejabat where Jabatan='Dekan'
                 and FakultasID = '$FakultasID'
             ");
             $kiri = TandaTangan::build($kiri);
